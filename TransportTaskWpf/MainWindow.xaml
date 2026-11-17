@@ -1,0 +1,80 @@
+﻿<Window x:Class="TransportTaskWpf.MainWindow"
+        xmlns="http://microsoft.com"
+        xmlns:x="http://microsoft.com"
+        Title="Транспортная задача (Вариант 6)" Height="560" Width="780"
+        WindowStartupLocation="CenterScreen" FontFamily="Segoe UI" FontSize="14">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Text="Исходные данные (Матрица расстояний, запасы и потребности):" 
+                   FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <Grid Grid.Row="1" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Таблица ввода данных -->
+            <DataGrid x:Name="dgInput" AutoGenerateColumns="False" CanUserAddRows="False" 
+                      HeadersVisibility="All" RowHeaderWidth="40" SelectionUnit="Cell">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="B1" Binding="{Binding B1}" Width="60"/>
+                    <DataGridTextColumn Header="B2" Binding="{Binding B2}" Width="60"/>
+                    <DataGridTextColumn Header="B3" Binding="{Binding B3}" Width="60"/>
+                    <DataGridTextColumn Header="B4" Binding="{Binding B4}" Width="60"/>
+                    <DataGridTextColumn Header="B5" Binding="{Binding B5}" Width="60"/>
+                    <DataGridTextColumn Header="Запасы (a)" Binding="{Binding Supply}" Width="90" FontWeight="Bold"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Панель кнопок -->
+            <StackPanel Grid.Column="1" Margin="20,0,0,0" VerticalAlignment="Top">
+                <Button Content="Загрузить Вариант 6" Height="35" Margin="0,0,0,10" 
+                        Click="BtnLoadVariant_Click" Background="#E1E1E1"/>
+                <Button Content="Метод северо-западного угла" Height="38" Margin="0,0,0,10" 
+                        Click="BtnNorthWest_Click" Background="#D0E8FF" FontWeight="SemiBold"/>
+                <Button Content="Метод минимальных элементов" Height="38" 
+                        Click="BtnMinElement_Click" Background="#D4F4DD" FontWeight="SemiBold"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Потребности (b) -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,15">
+            <TextBlock Text="Потребности (b): " VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,10,0"/>
+            <TextBox x:Name="txtB1" Width="55" Text="270" Margin="0,0,5,0" TextAlignment="Center"/>
+            <TextBox x:Name="txtB2" Width="55" Text="130" Margin="0,0,5,0" TextAlignment="Center"/>
+            <TextBox x:Name="txtB3" Width="55" Text="190" Margin="0,0,5,0" TextAlignment="Center"/>
+            <TextBox x:Name="txtB4" Width="55" Text="150" Margin="0,0,5,0" TextAlignment="Center"/>
+            <TextBox x:Name="txtB5" Width="55" Text="110" TextAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Таблица результата -->
+        <GroupBox Grid.Row="3" Header="Опорный план перевозок" Padding="10">
+            <DataGrid x:Name="dgResult" AutoGenerateColumns="False" IsReadOnly="True" 
+                      CanUserAddRows="False" HeadersVisibility="All" RowHeaderWidth="40">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="B1" Binding="{Binding B1}" Width="75"/>
+                    <DataGridTextColumn Header="B2" Binding="{Binding B2}" Width="75"/>
+                    <DataGridTextColumn Header="B3" Binding="{Binding B3}" Width="75"/>
+                    <DataGridTextColumn Header="B4" Binding="{Binding B4}" Width="75"/>
+                    <DataGridTextColumn Header="B5" Binding="{Binding B5}" Width="75"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <!-- Итоговая стоимость -->
+        <Border Grid.Row="4" Background="#F5F5F5" BorderBrush="#CCCCCC" BorderThickness="1" 
+                Padding="10" Margin="0,15,0,0" CornerRadius="4">
+            <TextBlock x:Name="txtResultInfo" Text="Выберите метод расчета для построения плана." 
+                       FontSize="15" FontWeight="Bold" Foreground="#222222"/>
+        </Border>
+    </Grid>
+</Window>
